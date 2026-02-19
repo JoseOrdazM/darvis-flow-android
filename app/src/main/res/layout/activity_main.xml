@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0D0D12"
+    android:padding="24dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Header -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🎩 Darvis Flow"
+            android:textSize="28sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/status_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stopped"
+            android:textColor="#888888"
+            android:textSize="14sp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Start/Stop -->
+        <Button
+            android:id="@+id/btn_start_stop"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Start Darvis"
+            android:textSize="16sp"
+            android:backgroundTint="#B450FF"
+            android:layout_marginBottom="32dp" />
+
+        <!-- Whisper API Key -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OPENAI API KEY (WHISPER)"
+            android:textColor="#AAAAAA"
+            android:textSize="12sp"
+            android:letterSpacing="0.1"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/whisper_api_key"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/input_background"
+            android:hint="sk-..."
+            android:textColor="#FFFFFF"
+            android:textColorHint="#555555"
+            android:inputType="textPassword"
+            android:paddingHorizontal="16dp"
+            android:textSize="14sp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Prompt Mode Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="PROMPT MODE"
+                android:textColor="#AAAAAA"
+                android:textSize="12sp"
+                android:letterSpacing="0.1" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/prompt_toggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- Provider Buttons -->
+        <TextView
+            android:id="@+id/prompt_provider_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Provider: Openrouter"
+            android:textColor="#888888"
+            android:textSize="12sp"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <Button
+                android:id="@+id/btn_anthropic"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="Anthropic"
+                android:textSize="11sp"
+                android:backgroundTint="#1A1A24"
+                android:layout_marginEnd="4dp" />
+
+            <Button
+                android:id="@+id/btn_openai"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="OpenAI"
+                android:textSize="11sp"
+                android:backgroundTint="#1A1A24"
+                android:layout_marginHorizontal="4dp" />
+
+            <Button
+                android:id="@+id/btn_openrouter"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="OpenRouter"
+                android:textSize="11sp"
+                android:backgroundTint="#1A1A24"
+                android:layout_marginStart="4dp" />
+        </LinearLayout>
+
+        <!-- Prompt Model -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MODEL"
+            android:textColor="#AAAAAA"
+            android:textSize="12sp"
+            android:letterSpacing="0.1"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/prompt_model"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/input_background"
+            android:hint="anthropic/claude-3.5-haiku"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#555555"
+            android:inputType="text"
+            android:paddingHorizontal="16dp"
+            android:textSize="14sp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Prompt API Key -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PROMPT API KEY"
+            android:textColor="#AAAAAA"
+            android:textSize="12sp"
+            android:letterSpacing="0.1"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/prompt_api_key"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/input_background"
+            android:hint="sk-or-..."
+            android:textColor="#FFFFFF"
+            android:textColorHint="#555555"
+            android:inputType="textPassword"
+            android:paddingHorizontal="16dp"
+            android:textSize="14sp"
+            android:layout_marginBottom="32dp" />
+
+        <!-- Footer -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hold the floating bubble to record.\nRelease to transcribe and copy to clipboard."
+            android:textColor="#555555"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
+</ScrollView>
