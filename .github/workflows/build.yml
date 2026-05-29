@@ -23,12 +23,12 @@ jobs:
         with:
           gradle-version: '8.11.1'
 
-      - name: Build Release APK
-        run: gradle assembleRelease
+      - name: Build Debug APK
+        run: gradle assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: whisper-blue-release
-          path: app/build/outputs/apk/release/app-release-unsigned.apk
+          name: whisper-blue-debug
+          path: app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
