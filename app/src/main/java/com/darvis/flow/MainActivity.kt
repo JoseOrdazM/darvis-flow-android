@@ -96,12 +96,12 @@ class MainActivity : AppCompatActivity() {
         startStopBtn.setOnClickListener {
             if (isOverlayRunning) {
                 stopOverlay()
-                startStopBtn.text = "Start Darvis"
+                startStopBtn.text = "Start Whisper Blue"
                 statusText.text = "Stopped"
             } else {
                 if (checkPermissions()) {
                     startOverlay()
-                    startStopBtn.text = "Stop Darvis"
+                    startStopBtn.text = "Stop Whisper Blue"
                     statusText.text = "Running — hold the bubble to record"
                 }
             }
@@ -131,7 +131,7 @@ class MainActivity : AppCompatActivity() {
 
         // Overlay
         if (!AndroidSettings.canDrawOverlays(this)) {
-            Toast.makeText(this, "Enable overlay permission for Darvis", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Enable overlay permission for Whisper Blue", Toast.LENGTH_LONG).show()
             startActivity(Intent(AndroidSettings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName")))
             return false
         }
