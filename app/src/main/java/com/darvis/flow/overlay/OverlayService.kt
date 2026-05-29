@@ -5,10 +5,12 @@ import android.animation.ObjectAnimator
 import android.app.Notification
 import android.app.PendingIntent
 import android.app.Service
+import android.content.BroadcastReceiver
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.PixelFormat
 import android.graphics.drawable.GradientDrawable
 import android.os.IBinder
@@ -71,6 +73,15 @@ class OverlayService : Service() {
     private val dragThreshold = 10
     private lateinit var params: WindowManager.LayoutParams
 
+    private val keyboardReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            when (intent.action) {
+                KeyboardDetectorService.ACTION_KEYBOARD_SHOWN -> showBubble()
+                KeyboardDetectorService.ACTION_KEYBOARD_HIDDEN -> if (state == OverlayState.IDLE) hideBubble()
+            }
+        }
+    }
+
     override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onCreate() {
@@ -79,10 +90,18 @@ class OverlayService : Service() {
         audioRecorder = AudioRecorder(this)
         createBubble()
         startForeground(1, createNotification())
+        val filter = IntentFilter().apply {
+            addAction(KeyboardDetectorService.ACTION_KEYBOARD_SHOWN)
+            addAction(KeyboardDetectorService.ACTION_KEYBOARD_HIDDEN)
+        }
+        registerReceiver(keyboardReceiver, filter, RECEIVER_NOT_EXPORTED)
+        // Start hidden — show only when keyboard is detected
+        hideBubble()
     }
 
     override fun onDestroy() {
         scope.cancel()
+        unregisterReceiver(keyboardReceiver)
         if (state == OverlayState.RECORDING) audioRecorder.cancel()
         waveformAnimator?.cancel()
         try { windowManager.removeView(bubbleView) } catch (_: Exception) {}
@@ -221,6 +240,16 @@ class OverlayService : Service() {
         recordingContainer.visibility = View.GONE
         idleContainer.visibility = View.VISIBLE
         bubbleIcon.alpha = 1f
+    }
+
+    private fun showBubble() {
+        bubbleView.visibility = View.VISIBLE
+    }
+
+    private fun hideBubble() {
+        if (state == OverlayState.IDLE) {
+            bubbleView.visibility = View.GONE
+        }
     }
 
     private fun startWaveformAnimation() {

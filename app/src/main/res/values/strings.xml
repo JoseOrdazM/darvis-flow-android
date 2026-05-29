@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Whisper Blue</string>
+    <string name="accessibility_description">Detecta cuándo el teclado está activo para mostrar el botón de dictado. No lee ni almacena lo que escribes.</string>
 </resources>

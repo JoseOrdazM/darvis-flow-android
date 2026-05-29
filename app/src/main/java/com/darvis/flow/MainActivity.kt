@@ -143,7 +143,24 @@ class MainActivity : AppCompatActivity() {
             return false
         }
 
+        // Accessibility Service — needed to detect when keyboard is open
+        if (!isAccessibilityEnabled()) {
+            Toast.makeText(this,
+                "Activa 'Whisper Blue' en Accesibilidad para que el botón aparezca solo al escribir. Solo detecta cuándo el teclado está abierto.",
+                Toast.LENGTH_LONG).show()
+            startActivity(Intent(AndroidSettings.ACTION_ACCESSIBILITY_SETTINGS))
+            return false
+        }
+
         return true
+    }
+
+    private fun isAccessibilityEnabled(): Boolean {
+        val service = "$packageName/${com.darvis.flow.overlay.KeyboardDetectorService::class.java.name}"
+        val enabled = try {
+            AndroidSettings.Secure.getString(contentResolver, AndroidSettings.Secure.ENABLED_ACCESSIBILITY_SERVICES) ?: ""
+        } catch (_: Exception) { "" }
+        return enabled.contains(service, ignoreCase = true)
     }
 
     private fun startOverlay() {
