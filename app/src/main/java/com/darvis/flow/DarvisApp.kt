@@ -8,8 +8,8 @@ import android.os.Build
 class DarvisApp : Application() {
 
     companion object {
-        const val CHANNEL_OVERLAY = "darvis_overlay"
-        const val CHANNEL_RESULT = "darvis_result"
+        const val CHANNEL_OVERLAY = "whisper_blue_overlay"
+        const val CHANNEL_RESULT = "whisper_blue_result"
     }
 
     override fun onCreate() {
@@ -23,7 +23,7 @@ class DarvisApp : Application() {
             "Recording Service",
             NotificationManager.IMPORTANCE_LOW
         ).apply {
-            description = "Keeps Darvis Flow recording in the background"
+            description = "Keeps Whisper Blue recording in the background"
         }
 
         val resultChannel = NotificationChannel(
