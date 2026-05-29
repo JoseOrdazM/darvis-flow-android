@@ -98,6 +98,11 @@ class OverlayService : Service() {
         btnCancel = bubbleView.findViewById(R.id.btn_cancel)
         btnConfirm = bubbleView.findViewById(R.id.btn_confirm)
 
+        val screenWidth = resources.displayMetrics.widthPixels
+        val dp = resources.displayMetrics.density
+        val bubblePx = (64 * dp).toInt()
+        val marginPx = (8 * dp).toInt()
+
         params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
             WindowManager.LayoutParams.WRAP_CONTENT,
@@ -107,7 +112,7 @@ class OverlayService : Service() {
             PixelFormat.TRANSLUCENT
         ).apply {
             gravity = Gravity.TOP or Gravity.START
-            x = 0
+            x = screenWidth - bubblePx - marginPx
             y = 200
         }
 
