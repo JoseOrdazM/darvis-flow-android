@@ -95,8 +95,6 @@ class OverlayService : Service() {
             addAction(KeyboardDetectorService.ACTION_KEYBOARD_HIDDEN)
         }
         registerReceiver(keyboardReceiver, filter, RECEIVER_NOT_EXPORTED)
-        // Start hidden — show only when keyboard is detected
-        hideBubble()
     }
 
     override fun onDestroy() {
