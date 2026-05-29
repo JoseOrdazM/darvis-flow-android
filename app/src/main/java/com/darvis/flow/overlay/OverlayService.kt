@@ -67,6 +67,7 @@ class OverlayService : Service() {
     private var initialY = 0
     private var initialTouchX = 0f
     private var initialTouchY = 0f
+    private var savedIdleX = -1
     private val dragThreshold = 10
     private lateinit var params: WindowManager.LayoutParams
 
@@ -181,6 +182,13 @@ class OverlayService : Service() {
 
     private fun startRecording() {
         state = OverlayState.RECORDING
+        savedIdleX = params.x
+        // Recording panel (~240dp) is wider than bubble (64dp) — shift left so right edges align
+        val dp = resources.displayMetrics.density
+        val panelWidth = (240 * dp).toInt()
+        val bubbleWidth = (64 * dp).toInt()
+        params.x = maxOf(0, savedIdleX - (panelWidth - bubbleWidth))
+        windowManager.updateViewLayout(bubbleView, params)
         idleContainer.visibility = View.GONE
         recordingContainer.visibility = View.VISIBLE
         startWaveformAnimation()
@@ -205,6 +213,11 @@ class OverlayService : Service() {
 
     private fun showIdle() {
         state = OverlayState.IDLE
+        if (savedIdleX >= 0) {
+            params.x = savedIdleX
+            windowManager.updateViewLayout(bubbleView, params)
+            savedIdleX = -1
+        }
         recordingContainer.visibility = View.GONE
         idleContainer.visibility = View.VISIBLE
         bubbleIcon.alpha = 1f
