@@ -39,7 +39,7 @@
             android:backgroundTint="#B450FF"
             android:layout_marginBottom="32dp" />
 
-        <!-- Whisper API Key -->
+        <!-- Whisper API Key — hidden, using local n8n endpoint -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,7 +47,8 @@
             android:textColor="#AAAAAA"
             android:textSize="12sp"
             android:letterSpacing="0.1"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="8dp"
+            android:visibility="gone" />
 
         <EditText
             android:id="@+id/whisper_api_key"
@@ -60,7 +61,8 @@
             android:inputType="textPassword"
             android:paddingHorizontal="16dp"
             android:textSize="14sp"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginBottom="24dp"
+            android:visibility="gone" />
 
         <!-- Prompt Mode Section -->
         <LinearLayout

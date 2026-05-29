@@ -149,14 +149,8 @@ class OverlayService : Service() {
             icon.alpha = 0.5f // Dim while processing
 
             try {
-                val whisperKey = Settings.whisperApiKey(this@OverlayService).first()
-                if (whisperKey.isBlank()) {
-                    showToast("Set your OpenAI API key in Darvis settings")
-                    return@launch
-                }
-
-                // Step 1: Transcribe
-                val transcription = WhisperApi.transcribe(audioFile, whisperKey).getOrThrow()
+                // Step 1: Transcribe via local n8n endpoint (no API key needed)
+                val transcription = WhisperApi.transcribe(audioFile).getOrThrow()
 
                 // Step 2: Optional prompt structuring
                 var result = transcription
