@@ -71,7 +71,7 @@ class OverlayService : Service() {
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
         return NotificationCompat.Builder(this, DarvisApp.CHANNEL_OVERLAY)
-            .setContentTitle("Darvis Flow")
+            .setContentTitle("Whisper Blue")
             .setContentText("Hold the bubble to record")
             .setSmallIcon(R.drawable.ic_mic)
             .setContentIntent(pendingIntent)
@@ -134,7 +134,7 @@ class OverlayService : Service() {
     private fun startRecording(icon: ImageView) {
         if (isRecording) return
         isRecording = true
-        icon.setColorFilter(0xFFFF3399.toInt()) // Magenta when recording
+        icon.setColorFilter(0xFF29B6F6.toInt()) // Sky blue when recording
         audioRecorder.start()
     }
 
@@ -170,7 +170,7 @@ class OverlayService : Service() {
 
                 // Step 3: Copy to clipboard
                 val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                clipboard.setPrimaryClip(ClipData.newPlainText("Darvis", result))
+                clipboard.setPrimaryClip(ClipData.newPlainText("Whisper Blue", result))
                 showToast("✅ Copied! Paste anywhere")
 
                 // Step 4: Show notification with the text (tappable)
@@ -187,7 +187,7 @@ class OverlayService : Service() {
 
     private fun showResultNotification(text: String) {
         val notification = NotificationCompat.Builder(this, DarvisApp.CHANNEL_RESULT)
-            .setContentTitle("Darvis — Ready to paste")
+            .setContentTitle("Whisper Blue — Ready to paste")
             .setContentText(text.take(100))
             .setStyle(NotificationCompat.BigTextStyle().bigText(text))
             .setSmallIcon(R.drawable.ic_mic)
